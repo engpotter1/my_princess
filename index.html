@@ -616,8 +616,8 @@
         </div>
       </div>
    </section>
-  <section id="letter" class="card section-card">
-      <h2 class="section-title">رسالة من قلبي ليكي لسمسمتي 💗</h2>
+<section id="letter" class="card section-card" style="display: none;">
+  <h2 class="section-title">رسالة من قلبي ليكي لسمسمتي 💗</h2>
      
       <p class="sub">استني ثواني… الرسالة بتتكتب مخصوص عشانك.</p>
 
@@ -630,8 +630,8 @@
 <a href="#chocolate" class="btn primary" id="openChocoBtn">افتحي علبة الشوكولاتة 🍫</a>
     </section>
 
-    <section id="chocolate" class="card section-card">
-      <h2 class="section-title">علبة شوكولاتة الحب 🍫♥️</h2>
+<section id="chocolate" class="card section-card" style="display: none;">
+  <h2 class="section-title">علبة شوكولاتة الحب 🍫♥️</h2>
       <p class="sub">
         كل قطعة شوكولاتة فيها كلمه حلوه تشبه بحبك.
         دوسي على كل قطعة وشوفي اللي جواها.
@@ -653,8 +653,8 @@
       <p class="hint">اضغطي على أي قطعة شوكولاتة… كل واحدة فيها كلمة حب مختلفة.</p>
     </section>
 
-    <section class="card section-card">
-      <h2 class="section-title">وفي الآخر… 🫶🏻</h2>
+<section class="card section-card" style="display: none;">
+  <h2 class="section-title">وفي الآخر… 🫶🏻</h2>
 
       <p class="quote">
       حبيت انو اعمل حاجه مميزه ليكي ف العيد دا 
@@ -821,14 +821,23 @@ if (history.scrollRestoration) {
 
 let isTypingStarted = false;
 
-// 2. تشغيل زرار الرسالة بس
+// لما تدوس على زرار "افتحي الرسالة"
 document.getElementById("openLetterBtn").addEventListener("click", (e) => {
   e.preventDefault();
   
-  // حرك الشاشة لسكشن الرسالة بسلاسة
-  document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
+  // 1. أظهر سكشن الرسالة وسكشن الشوكولاتة والسكشن الأخير عشان الصفحة تفتح ورا بعضها
+  const letterSection = document.getElementById("letter");
+  const chocoSection = document.getElementById("chocolate");
+  const finalSection = document.getElementById("surprise").closest('section');
   
-  // ابدأ الكتابة التلقائية بعد ما يوصل
+  letterSection.style.display = "block";
+  chocoSection.style.display = "block";
+  finalSection.style.display = "block";
+  
+  // 2. انزل لسكشن الرسالة بسلاسة
+  letterSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  
+  // 3. ابدأ تأثير الكتابة
   if (!isTypingStarted) {
     isTypingStarted = true;
     setTimeout(typeLetter, 400); 
