@@ -615,12 +615,10 @@
           <button class="btn ghost" id="magicBtn" type="button">رشي سحر كده ✨</button>
         </div>
       </div>
-    </section>
-
-  <section id="letter" class="card section-card hidden">
-
-   <section id="chocolate" class="card section-card hidden">
+   </section>
+  <section id="letter" class="card section-card">
       <h2 class="section-title">رسالة من قلبي ليكي لسمسمتي 💗</h2>
+     
       <p class="sub">استني ثواني… الرسالة بتتكتب مخصوص عشانك.</p>
 
       <div class="envelope">
@@ -815,21 +813,25 @@
 
  // كود الزرار الأول (تأكد إنه كدا)
 // 1. أول ما الصفحة تفتح على الموبايل، الكود دا هيجبر الشاشة تطلع فوق خالص وتثبت
+// 1. إجبار الموبايل يفتح فوق خالص ومينزلش لوحده
 window.scrollTo(0, 0);
 if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
+  history.scrollRestoration = 'manual';
 }
 
 let isTypingStarted = false;
 
-// 2. تشغيل زرار الرسالة الأولاني وتنزل الشاشة ليه بسلاسة
+// 2. تشغيل زرار الرسالة بس
 document.getElementById("openLetterBtn").addEventListener("click", (e) => {
-  e.preventDefault(); // بيمنع أي حركة عشوائية للمتصفح
+  e.preventDefault();
+  
+  // حرك الشاشة لسكشن الرسالة بسلاسة
   document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
   
+  // ابدأ الكتابة التلقائية بعد ما يوصل
   if (!isTypingStarted) {
     isTypingStarted = true;
-    setTimeout(typeLetter, 400); // يبدأ يكتب أول ما يوصل
+    setTimeout(typeLetter, 400); 
   }
 });
 
