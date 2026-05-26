@@ -617,7 +617,9 @@
       </div>
     </section>
 
-    <section id="letter" class="card section-card">
+  <section id="letter" class="card section-card hidden">
+
+   <section id="chocolate" class="card section-card hidden">
       <h2 class="section-title">رسالة من قلبي ليكي لسمسمتي 💗</h2>
       <p class="sub">استني ثواني… الرسالة بتتكتب مخصوص عشانك.</p>
 
@@ -812,8 +814,12 @@
     });
 
  // كود الزرار الأول (تأكد إنه كدا)
+// كود الزرار الأول (افتحي الرسالة)
 let isTypingStarted = false;
 document.getElementById("openLetterBtn").addEventListener("click", () => {
+  // هنظهر السكشن الأول فوراً عشان نعرف ننزل عليه
+  document.getElementById("letter").classList.remove("hidden");
+  
   document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
   if (!isTypingStarted) {
     isTypingStarted = true;
@@ -821,8 +827,11 @@ document.getElementById("openLetterBtn").addEventListener("click", () => {
   }
 });
 
-// ضيف الكود الجديد دا لزرار الشوكولاتة تحتيه:
+// كود الزرار الثاني (افتحي علبة الشوكولاتة)
 document.getElementById("openChocoBtn").addEventListener("click", () => {
+  // هنظهر سكشن الشوكولاتة فوراً لما تدوس
+  document.getElementById("chocolate").classList.remove("hidden");
+  
   document.getElementById("chocolate").scrollIntoView({ behavior: "smooth" });
 });
     
