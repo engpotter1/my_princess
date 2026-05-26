@@ -611,7 +611,7 @@
         </div>
 
         <div class="btns">
-         <a href="#letter" class="btn primary" id="openLetterBtn">افتحي الرسالة 💌</a>
+        <a href="javascript:void(0);" class="btn primary" id="openLetterBtn">افتحي الرسالة 💌</a>
           <button class="btn ghost" id="magicBtn" type="button">رشي سحر كده ✨</button>
         </div>
       </div>
@@ -811,12 +811,16 @@
       if(e.target === modal) closeModal();
     });
 
-    let isTypingStarted = false; // عشان متعدش كتابة لو داست كذا مرة
+  let isTypingStarted = false;
 
 document.getElementById("openLetterBtn").addEventListener("click", () => {
+  // 1. هننزل الشاشة للرسالة بسلاسة أول ما تدوس
+  document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
+
+  // 2. هنبدأ نكتب الرسالة
   if (!isTypingStarted) {
     isTypingStarted = true;
-    setTimeout(typeLetter, 300); // تأخير بسيط لحد ما الشاشة تنزل للرسالة
+    setTimeout(typeLetter, 400); // تأخير بسيط لحد ما الشاشة توصل تحت وتبدأ تكتب
   }
 });
     
