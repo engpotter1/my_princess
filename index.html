@@ -821,29 +821,38 @@ if (history.scrollRestoration) {
 
 let isTypingStarted = false;
 
-// لما تدوس على زرار "افتحي الرسالة"
+// 1. لما تدوس على زرار "افتحي الرسالة" -> بيظهر الرسالة بس!
 document.getElementById("openLetterBtn").addEventListener("click", (e) => {
   e.preventDefault();
   
-  // 1. أظهر سكشن الرسالة وسكشن الشوكولاتة والسكشن الأخير عشان الصفحة تفتح ورا بعضها
   const letterSection = document.getElementById("letter");
-  const chocoSection = document.getElementById("chocolate");
-  const finalSection = document.getElementById("surprise").closest('section');
+  letterSection.style.display = "block"; // بنظهر سكشن الرسالة فقط
   
-  letterSection.style.display = "block";
-  chocoSection.style.display = "block";
-  finalSection.style.display = "block";
-  
-  // 2. انزل لسكشن الرسالة بسلاسة
   letterSection.scrollIntoView({ behavior: "smooth", block: "start" });
   
-  // 3. ابدأ تأثير الكتابة
   if (!isTypingStarted) {
     isTypingStarted = true;
     setTimeout(typeLetter, 400); 
   }
 });
 
+// 2. لما تدوس على زرار "افتحي علبة الشوكولاتة" -> بيظهر الشوكولاتة والسكشن الأخير!
+// الكود دا هيلقط الزرار بتاع الشوكولاتة تلقائياً من كودك الأصلي
+const chocoBtn = document.querySelector('a[href="#chocolate"]');
+if (chocoBtn) {
+  chocoBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    const chocoSection = document.getElementById("chocolate");
+    const finalSection = document.getElementById("surprise").closest('section');
+    
+    chocoSection.style.display = "block"; // أظهر الشوكولاتة
+    finalSection.style.display = "block"; // أظهر السكشن الأخير
+    
+    // انزل لعلبة الشوكولاتة بسلاسة
+    chocoSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 // 3. كود لتشغيل زرار الشوكولاتة التاني (تأكد إنك ضفت id="openChocoBtn" للزرار التاني في الـ HTML)
 const chocoBtn = document.getElementById("openChocoBtn") || document.querySelector('a[href="#chocolate"]');
 if (chocoBtn) {
