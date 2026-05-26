@@ -629,7 +629,7 @@
         </div>
       </div>
 
-<a href="javascript:void(0);" class="btn primary" id="openChocoBtn">افتحي علبة الشوكولاتة 🍫</a>
+<a href="#chocolate" class="btn primary" id="openChocoBtn">افتحي علبة الشوكولاتة 🍫</a>
     </section>
 
     <section id="chocolate" class="card section-card">
@@ -814,26 +814,33 @@
     });
 
  // كود الزرار الأول (تأكد إنه كدا)
-// كود الزرار الأول (افتحي الرسالة)
+// 1. أول ما الصفحة تفتح على الموبايل، الكود دا هيجبر الشاشة تطلع فوق خالص وتثبت
+window.scrollTo(0, 0);
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
 let isTypingStarted = false;
-document.getElementById("openLetterBtn").addEventListener("click", () => {
-  // هنظهر السكشن الأول فوراً عشان نعرف ننزل عليه
-  document.getElementById("letter").classList.remove("hidden");
+
+// 2. تشغيل زرار الرسالة الأولاني وتنزل الشاشة ليه بسلاسة
+document.getElementById("openLetterBtn").addEventListener("click", (e) => {
+  e.preventDefault(); // بيمنع أي حركة عشوائية للمتصفح
+  document.getElementById("letter").scrollIntoView({ behavior: "smooth", block: "start" });
   
-  document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
   if (!isTypingStarted) {
     isTypingStarted = true;
-    setTimeout(typeLetter, 400);
+    setTimeout(typeLetter, 400); // يبدأ يكتب أول ما يوصل
   }
 });
 
-// كود الزرار الثاني (افتحي علبة الشوكولاتة)
-document.getElementById("openChocoBtn").addEventListener("click", () => {
-  // هنظهر سكشن الشوكولاتة فوراً لما تدوس
-  document.getElementById("chocolate").classList.remove("hidden");
-  
-  document.getElementById("chocolate").scrollIntoView({ behavior: "smooth" });
-});
+// 3. كود لتشغيل زرار الشوكولاتة التاني (تأكد إنك ضفت id="openChocoBtn" للزرار التاني في الـ HTML)
+const chocoBtn = document.getElementById("openChocoBtn") || document.querySelector('a[href="#chocolate"]');
+if (chocoBtn) {
+  chocoBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("chocolate").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
     
     window.addEventListener("keydown", (e) => {
       if(e.key === "Escape") closeModal();
