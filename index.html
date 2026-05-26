@@ -575,12 +575,63 @@
       .piece{min-height:78px}
       .btn{width:100%}
     }
+    #introOverlay {
+  position: fixed;
+  inset: 0;
+  background: #000000; /* شاشة سوداء تماماً */
+  z-index: 9999; /* عشان تغطي الموقع كله في البداية */
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.intro-content {
+  text-align: center;
+  max-width: 550px;
+  width: 100%;
+  animation: fadeInEffect 1.5s ease forwards; /* أنيميشن الظهور من العدم */
+  opacity: 0;
+}
+
+.intro-img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 111, 174, 0.2);
+  margin-bottom: 24px;
+}
+
+.intro-text {
+  color: #fff;
+  font-size: clamp(16px, 2.5vw, 20px);
+  line-height: 2;
+  font-weight: 700;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* تأثير الظهور السحري */
+@keyframes fadeInEffect {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
   </style>
 </head>
 
 <body>
   <div id="floatingLayer"></div>
-
+<div id="introOverlay">
+  <div class="intro-content">
+    <img src="image.jpg" alt="Smsm" class="intro-img" />
+    
+    <p class="intro-text">
+      الصورة دي اول مره اميرتي قالتلي بحبك و كنت طاير م الفرحه ومصدق عنيا .. ف حبيت ادي ال هديه الصغننه دي ليها 🤍
+    </p>
+    
+    <button type="button" class="btn primary" id="startAppBtn">شوفي الهدية 💝</button>
+  </div>
+</div>
   <main class="app">
 
     <section class="hero">
@@ -823,7 +874,18 @@ let isTypingStarted = false;
 
 // كود تشغيل الأزرار والسكاشن بالترتيب
 document.addEventListener("DOMContentLoaded", () => {
-  
+  // جوه document.addEventListener("DOMContentLoaded", () => { ... }) ضيف دا:
+
+const startAppBtn = document.getElementById("startAppBtn");
+if (startAppBtn) {
+  startAppBtn.addEventListener("click", () => {
+    const overlay = document.getElementById("introOverlay");
+    if (overlay) {
+      // إخفاء الشاشة السوداء فوراً
+      overlay.style.display = "none";
+    }
+  });
+}
   // 1. زرار افتحي الرسالة
   const openLetterBtn = document.getElementById("openLetterBtn");
   if (openLetterBtn) {
