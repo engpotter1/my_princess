@@ -627,7 +627,7 @@
         </div>
       </div>
 
-      <a href="#chocolate" class="btn primary">افتحي علبة الشوكولاتة 🍫</a>
+<a href="javascript:void(0);" class="btn primary" id="openChocoBtn">افتحي علبة الشوكولاتة 🍫</a>
     </section>
 
     <section id="chocolate" class="card section-card">
@@ -811,17 +811,19 @@
       if(e.target === modal) closeModal();
     });
 
-  let isTypingStarted = false;
-
+ // كود الزرار الأول (تأكد إنه كدا)
+let isTypingStarted = false;
 document.getElementById("openLetterBtn").addEventListener("click", () => {
-  // 1. هننزل الشاشة للرسالة بسلاسة أول ما تدوس
   document.getElementById("letter").scrollIntoView({ behavior: "smooth" });
-
-  // 2. هنبدأ نكتب الرسالة
   if (!isTypingStarted) {
     isTypingStarted = true;
-    setTimeout(typeLetter, 400); // تأخير بسيط لحد ما الشاشة توصل تحت وتبدأ تكتب
+    setTimeout(typeLetter, 400);
   }
+});
+
+// ضيف الكود الجديد دا لزرار الشوكولاتة تحتيه:
+document.getElementById("openChocoBtn").addEventListener("click", () => {
+  document.getElementById("chocolate").scrollIntoView({ behavior: "smooth" });
 });
     
     window.addEventListener("keydown", (e) => {
